@@ -223,3 +223,39 @@ st.markdown("""
 2. Test with `streamlit run app.py`.
 3. Deploy: GitHub → Streamlit Cloud or Vercel (add `requirements.txt`).
 """)
+
+
+'''
+1. Stop / delete Cloud Run services
+Cloud Run is pay‑per‑use, but if you’re done, safest is to delete the service.
+​
+
+List services:
+
+bash
+gcloud run services list --platform=managed --region=$GCP_REGION
+Delete each service you created (e.g. taxifare):
+
+bash
+gcloud run services delete taxifare \
+  --platform=managed \
+  --region=$GCP_REGION
+
+
+gcloud artifacts repositories list
+You’ll get a table with REPOSITORY and LOCATION. Use the LOCATION from that table:
+
+bash
+gcloud artifacts repositories delete taxifare --location=THE_LOCATION_FROM_TABLE
+This will fully remove the taxifare repo and its images.
+
+Do you see a taxifare row when you run gcloud artifacts repositories list?
+bash
+gcloud artifacts repositories delete taxifare --location=us-central1
+Then confirm with y when prompted.
+
+If you want, after that you can verify it’s gone:
+
+bash
+gcloud artifacts repositories list
+'''
